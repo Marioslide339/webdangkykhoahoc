@@ -1,0 +1,6 @@
+{
+  "name": "EdTech Solution Architect Workspace",
+  "description": "An interactive workspace for EdTech solution architects and product managers to analyze raw documents, build structured curriculums, design UX flow roadmaps, generate database schemas, and create educational quiz questions using an advanced EdTech persona.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Đăng Ký & Thanh Toán – Khoá Học Công Nghệ | MARIS SLIDE</title>
+  <meta name="description" content="Đăng ký ngay các khoá học công nghệ dành cho giáo viên. Thanh toán nhanh chóng, tiện lợi qua QR code ngân hàng." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       RESET & VARIABLES
+       ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #e8192c;
+      --red-dark: #c01020;
+      --orange: #f97316;
+      --orange-light: #fdba74;
+      --yellow: #fbbf24;
+      --green: #10b981;
+      --green-dark: #059669;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-dark: #1e293b;
+      --text-body: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --font: 'Be Vietnam Pro', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.05);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-page);
+      color: var(--text-body);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+    /* ============================================
+       HEADER (Matches Screenshot Light Theme)
+       ============================================ */
+    header.top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .top-nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 960px; margin: 0 auto; padding: 12px 16px;
+    }
+
+    .brand-logo-area {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 40px; width: auto; object-fit: contain; border-radius: 6px;
+    }
+
+    .brand-title-area { display: flex; flex-direction: column; }
+    .brand-main-title { font-size: 18px; font-weight: 900; color: var(--red); line-height: 1.1; }
+    .brand-tagline { font-size: 9px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .phone-pill {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700; color: var(--text-dark);
+      background: #f1f5f9; border: 1.5px solid var(--border);
+      padding: 8px 16px; border-radius: 50px; text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .phone-pill::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--red); animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232,25,44,0.6); }
+      50% { box-shadow: 0 0 0 5px rgba(232,25,44,0); }
+    }
+
+    .phone-pill:hover { border-color: var(--red); color: var(--red); background: #fff1f3; }
+
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #ffffff; font-size: 12px; font-weight: 800;
+      padding: 9px 18px; border-radius: 50px; border: none;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(232,25,44,0.25);
+      cursor: pointer; transition: all 0.25s;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(232,25,44,0.35);
+    }
+
+    /* Small Orange bar under header */
+    .header-bar-accent {
+      width: 32px; height: 4px; background: var(--orange);
+      border-radius: 2px; margin: 16px auto 0;
+    }
+
+    /* ============================================
+       STEPS INDICATOR (Light Theme)
+       ============================================ */
+    .steps-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin: 24px auto 32px; max-width: 440px; padding: 0 10px;
+    }
+
+    .step-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+
+    .step-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 14px;
+      border: 2px solid var(--border); background: #ffffff; color: var(--text-muted);
+      transition: all 0.35s ease;
+    }
+
+    .step-circle.active {
+      border-color: var(--red); background: #ffffff; color: var(--red);
+      box-shadow: 0 0 12px rgba(232,25,44,0.15);
+    }
+
+    .step-circle.done {
+      border-color: var(--green); background: var(--green); color: #ffffff;
+      box-shadow: 0 0 8px rgba(16,185,129,0.2);
+    }
+
+    .step-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; text-align:center; line-height: 1.3; }
+    .step-label.active { color: var(--text-dark); }
+    .step-label.done { color: var(--green); }
+
+    .step-connector {
+      height: 2px; flex: 1; max-width: 50px;
+      background: var(--border); border-radius: 1px; margin-bottom: 20px;
+      transition: background 0.35s ease;
+    }
+    .step-connector.done { background: var(--green); }
+
+    /* ============================================
+       PAGE CONTAINER
+       ============================================ */
+    .container-body {
+      background: #ffffff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: var(--shadow); margin-bottom: 32px;
+    }
+
+    .sec-title {
+      font-size: 18px; font-weight: 900; color: var(--text-dark);
+      text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* ============================================
+       STEP 1: COURSE SELECTION
+       ============================================ */
+    #step1 { display: block; }
+    #step2 { display: none; }
+    #step3 { display: none; }
+
+    /* Combo Banner (Screenshot matching style) */
+    .combo-banner {
+      background: linear-gradient(135deg, #fff5f5 0%, #fffbf5 50%, #ffffff 100%);
+      border: 2px solid var(--orange); border-radius: var(--radius);
+      padding: 24px; margin-bottom: 20px; position: relative; overflow: hidden;
+      cursor: pointer; transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(249,115,22,0.06);
+    }
+
+    .combo-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(249,115,22,0.12);
+    }
+
+    .combo-banner.selected {
+      border-color: var(--red);
+      background: linear-gradient(135deg, #fff1f2 0%, #fffbeb 100%);
+      box-shadow: 0 8px 24px rgba(232,25,44,0.12);
+    }
+
+    .combo-badge-top {
+      position: absolute; top: 0; left: 24px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      font-size: 9px; font-weight: 800; color: #ffffff; padding: 4px 14px;
+      border-radius: 0 0 8px 8px; letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    .combo-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; margin-top: 8px;
+    }
+
+    .combo-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+
+    .combo-check {
+      width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--orange);
+      background: #ffffff; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 900; flex-shrink: 0; transition: all 0.3s;
+      color: transparent;
+    }
+
+    .combo-banner.selected .combo-check {
+      background: var(--red); border-color: var(--red); color: #ffffff;
+    }
+
+    .combo-name { font-size: 16px; font-weight: 900; color: var(--text-dark); text-transform: uppercase; }
+    .combo-sub { font-size: 12px; color: var(--text-body); margin-top: 3px; line-height: 1.4; }
+
+    .combo-price { text-align: right; flex-shrink: 0; }
+    .combo-price-old { font-size: 13px; color: var(--text-muted); text-decoration: line-through; display: block; }
+    .combo-price-new {
+      font-size: 28px; font-weight: 900;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1.1;
+    }
+
+    .divider-or {
+      text-align: center; font-size: 11px; font-weight: 800; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 2px; margin: 20px 0;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .divider-or::before, .divider-or::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* Course Grid */
+    .courses-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .courses-grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    /* Cards (Match Screenshot Style) */
+    .course-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 20px;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column; gap: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.015);
+    }
+
+    .course-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: #cbd5e1;
+    }
+
+    .course-card.selected {
+      border-color: var(--red);
+      box-shadow: 0 8px 24px rgba(232,25,44,0.08);
+      background: #fffcfc;
+    }
+
+    .card-top { display: flex; align-items: flex-start; gap: 12px; }
+
+    /* Number badge sitting top-left (Screenshot style) */
+    .card-num-badge {
+      font-size: 13px; font-weight: 900; color: #ffffff;
+      padding: 4px 12px; border-radius: 8px; flex-shrink: 0;
+    }
+
+    .course-card.selected .card-check-corner {
+      background: var(--red); border-color: var(--red); color: #ffffff;
+    }
+
+    .card-check-corner {
+      position: absolute; top: 20px; right: 20px;
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid var(--border); background: #ffffff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 900; color: transparent;
+      transition: all 0.25s;
+    }
+
+    .card-icon { font-size: 32px; display: block; margin: 4px auto 0; text-align: center; }
+
+    .card-info { flex: 1; min-width: 0; text-align: center; }
+    .card-title { font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--text-dark); line-height: 1.4; }
+    .card-subtitle { font-size: 11px; font-weight: 700; margin-top: 4px; letter-spacing: 0.3px; text-transform: uppercase; }
+
+    /* Red bullet feature list */
+    .card-features { list-style: none; flex: 1; padding: 4px 0; }
+    .card-features li {
+      font-size: 12.5px; color: var(--text-body); padding: 4px 0;
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .card-features li::before {
+      content: '✓'; color: var(--red); font-weight: 900; font-size: 13px; flex-shrink: 0;
+    }
+
+    /* Pricing box (Light pink theme) */
+    .card-pricing-box {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      background: #fff5f5; border-radius: 12px; padding: 10px 14px;
+    }
+    .price-old { font-size: 14px; font-weight: 700; color: var(--text-muted); text-decoration: line-through; }
+    .price-promo-lbl { font-size: 10px; font-weight: 800; color: var(--orange); text-transform: uppercase; letter-spacing: 0.5px; }
+    .price-new {
+      font-size: 24px; font-weight: 900; color: var(--red);
+    }
+
+    /* Orange gradient main buttons (Screenshot style) */
+    .card-select-btn {
+      width: 100%; padding: 11px; border: none; border-radius: 10px;
+      font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #ffffff; cursor: pointer; transition: all 0.25s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      box-shadow: 0 4px 10px rgba(232,25,44,0.15);
+    }
+
+    .course-card.selected .card-select-btn {
+      background: var(--green);
+      box-shadow: 0 4px 10px rgba(16,185,129,0.15);
+    }
+
+    /* Price Summary Box */
+    .price-summary {
+      background: #f8fafc; border: 1.5px solid var(--border); border-radius: var(--radius);
+      padding: 16px 20px; margin: 24px 0; display: none;
+    }
+
+    .price-summary.show { display: block; }
+    .ps-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-body); margin-bottom: 8px; }
+    .ps-row:last-child { margin-bottom: 0; }
+    .ps-total {
+      font-size: 22px; font-weight: 900; color: var(--red);
+    }
+
+    /* ============================================
+       STEP 2: FORM INPUTS
+       ============================================ */
+    .form-card { display: flex; flex-direction: column; gap: 20px; }
+
+    .selected-summary {
+      background: #f8fafc; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px; margin-bottom: 8px;
+    }
+    .ss-title { font-size: 12px; font-weight: 800; color: var(--text-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .ss-course { font-size: 13px; color: var(--text-body); padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+    .ss-course::before { content: '✓'; color: var(--green); font-weight: 900; }
+    .ss-total { font-size: 15px; font-weight: 800; color: var(--red); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; gap: 14px; } }
+
+    .form-label {
+      font-size: 11px; font-weight: 800; color: var(--text-dark);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%; padding: 12px 14px;
+      background: #ffffff; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-dark); font-size: 14px;
+      outline: none; transition: all 0.25s;
+    }
+
+    .form-input::placeholder { color: var(--text-muted); }
+    .form-input:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(232,25,44,0.06);
+    }
+
+    .form-err { color: var(--red); font-size: 12px; font-weight: 700; margin-top: 4px; }
+
+    /* ============================================
+       STEP 3: PAYMENT
+       ============================================ */
+    .pay-card { border-radius: var(--radius); overflow: hidden; }
+
+    .pay-header {
+      padding: 16px 20px; background: #fff5f5; border-bottom: 1.5px solid var(--border);
+    }
+    .pay-course-lbl {
+      font-size: 13px; font-weight: 700; color: var(--red);
+      background: #ffffff; border: 1px solid rgba(232,25,44,0.2);
+      border-radius: 6px; padding: 6px 12px; display: inline-block; margin-top: 8px;
+    }
+
+    .pay-code-box {
+      background: linear-gradient(135deg, #fffbeb, #fffbeb);
+      border: 1.5px solid var(--orange-light); border-radius: var(--radius-sm);
+      padding: 16px; text-align: center; margin: 16px 0;
+    }
+    .pay-code-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-body); margin-bottom: 6px; }
+    .pay-code-value {
+      font-size: 26px; font-weight: 900; letter-spacing: 4px; color: var(--orange);
+      font-family: 'Courier New', monospace; margin-bottom: 4px; cursor: pointer;
+    }
+    .pay-code-hint { font-size: 11px; color: var(--text-muted); }
+
+    /* Bank tabs */
+    .bank-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .bank-tab {
+      flex: 1; padding: 10px 8px;
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      background: #f8fafc; color: var(--text-body);
+      font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font);
+      transition: all 0.25s;
+    }
+    .bank-tab.active {
+      border-color: var(--red); background: #ffffff; color: var(--red);
+      box-shadow: 0 2px 8px rgba(232,25,44,0.06);
+    }
+
+    /* Bank panel */
+    .bank-panel { display: none; }
+    .bank-panel.active { display: block; }
+
+    .bi-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; }
+    .bi-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; min-width: 90px; flex-shrink: 0; }
+    .bi-value { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+    .bi-stk { font-size: 18px; font-weight: 900; color: var(--red); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .bi-stk:hover { color: var(--orange); }
+
+    /* QR Code */
+    .qr-wrap { text-align: center; padding: 16px 0 8px; }
+    .qr-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+    .qr-frame { background: #ffffff; border-radius: 12px; padding: 10px; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1.5px solid var(--border); }
+    .qr-img { width: 180px; height: 180px; display: block; border-radius: 6px; }
+    .qr-brand { margin-top: 10px; font-size: 13px; font-weight: 800; }
+    .mb-brand { color: #003893; }
+    .tcb-brand { color: #ed1c24; }
+
+    /* Pay note */
+    .pay-note {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-sm);
+      padding: 14px 16px; margin: 16px 0;
+    }
+    .pay-note-ico { font-size: 20px; flex-shrink: 0; }
+    .pay-note-txt { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+    .pay-note-txt strong { color: var(--green-dark); }
+    .pay-note-txt a { color: var(--red); text-decoration: none; font-weight: 700; }
+
+    /* Zalo btn */
+    .zalo-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px; background: #0068ff;
+      color: #ffffff; font-size: 14px; font-weight: 800;
+      border-radius: var(--radius-sm); text-decoration: none;
+      text-transform: uppercase; letter-spacing: 1px;
+      box-shadow: 0 4px 14px rgba(0,104,255,0.3);
+      transition: all 0.28s;
+    }
+    .zalo-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,104,255,0.4); }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn-primary {
+      width: 100%; padding: 14px; margin-top: 10px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #ffffff; font-size: 14px; font-weight: 800;
+      border: none; border-radius: var(--radius-sm); cursor: pointer;
+      text-transform: uppercase; letter-spacing: 1px;
+      box-shadow: 0 4px 14px rgba(232,25,44,0.25);
+      transition: all 0.28s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font);
+    }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,25,44,0.35); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-back {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; padding: 11px;
+      background: #f1f5f9; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-body);
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: all 0.25s; margin-top: 10px;
+    }
+    .btn-back:hover { background: #e2e8f0; }
+
+    /* ============================================
+       SUCCESS PANEL
+       ============================================ */
+    .success-panel { text-align: center; padding: 24px 16px; display: none; }
+    .success-panel.show { display:block; }
+    .success-icon { font-size: 54px; display: block; margin-bottom: 12px; }
+    .success-title { font-size: 20px; font-weight: 900; color: var(--green-dark); margin-bottom: 8px; }
+    .success-text { font-size: 13.5px; color: var(--text-body); line-height: 1.6; }
+
+    /* ============================================
+       TOAST
+       ============================================ */
+    .toast {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      background: rgba(16,185,129,0.95); color: #ffffff; padding: 10px 24px;
+      border-radius: 50px; font-size: 13.5px; font-weight: 700;
+      z-index: 9999; opacity: 0; transition: opacity 0.3s;
+      pointer-events: none; white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .toast.show { opacity: 1; }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      text-align: center; padding: 24px 16px 32px;
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+    }
+    footer p { color: var(--text-muted); font-size: 11.5px; line-height: 1.8; }
+    footer a { color: var(--red); text-decoration: none; font-weight: 600; }
+
+    /* ============================================
+       MOBILE REFINEMENTS
+       ============================================ */
+    @media (max-width: 480px) {
+      .wrap { padding: 0 10px; }
+      .container-body { padding: 16px; }
+      .top-nav-inner { padding: 10px 12px; }
+      .phone-pill { display: none; }
+      .combo-inner { flex-direction: column; align-items: flex-start; }
+      .combo-price { align-self: flex-end; margin-top: -8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="brand-logo-area">
+        <img src="/logo.png" alt="Maris Slide Logo" class="brand-logo-img" onerror="this.src='src/logo.png';this.onerror=null;" />
+        <div class="brand-title-area">
+          <span class="brand-main-title">Maris Slide</span>
+          <span class="brand-tagline">Tiên phong công nghệ giáo dục</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="https://zalo.me/0396581283" target="_blank" rel="noopener noreferrer" class="phone-pill">
+          <span>0396.581.283</span>
+        </a>
+        <button class="nav-btn" onclick="window.location.href='/'">
+          <span>🏠</span> Trang Chủ
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="header-bar-accent"></div>
+
+    <!-- Steps -->
+    <div class="steps-bar" id="steps-bar">
+      <div class="step-item">
+        <div class="step-circle active" id="step-circle-1">1</div>
+        <div class="step-label active" id="step-label-1">Chọn khoá</div>
+      </div>
+      <div class="step-connector" id="conn-1"></div>
+      <div class="step-item">
+        <div class="step-circle" id="step-circle-2">2</div>
+        <div class="step-label" id="step-label-2">Điền thông tin</div>
+      </div>
+      <div class="step-connector" id="conn-2"></div>
+      <div class="step-item">
+        <div class="step-circle" id="step-circle-3">3</div>
+        <div class="step-label" id="step-label-3">Thanh toán</div>
+      </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <main class="container-body">
+
+      <!-- ==================== STEP 1: CHOOSE COURSE ==================== -->
+      <section id="step1">
+        <div class="sec-title">📚 Bước 1: Chọn Khoá Học Muốn Đăng Ký</div>
+
+        <!-- Combo Card -->
+        <div class="combo-banner" id="combo-card" onclick="toggleCombo()">
+          <div class="combo-badge-top">⭐ Siêu tiết kiệm – Tối ưu nhất</div>
+          <div class="combo-inner">
+            <div class="combo-left">
+              <div class="combo-check" id="combo-check">✓</div>
+              <div class="combo-info">
+                <div class="combo-name">⭐ COMBO 6 KHOÁ HỌC</div>
+                <div class="combo-sub">E-Learning · AI Giảng dạy · Tạo App · Canva · PowerPoint · Hoạt hình 2D</div>
+              </div>
+            </div>
+            <div class="combo-price">
+              <span class="combo-price-old">2.494.000đ</span>
+              <span class="combo-price-new">999.000đ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider-or">Hoặc chọn từng khoá học lẻ</div>
+
+        <!-- Individual Grid -->
+        <div class="courses-grid" id="courses-grid"></div>
+
+        <!-- Summary -->
+        <div class="price-summary" id="price-summary">
+          <div class="ps-row">
+            <span>Số khoá học đã chọn:</span>
+            <strong id="ps-count">0</strong>
+          </div>
+          <div class="ps-row">
+            <span>TỔNG TIỀN THANH TOÁN:</span>
+            <span class="ps-total" id="ps-total">0đ</span>
+          </div>
+          <div class="combo-upgrade-tip" id="combo-upgrade-tip" style="display:none">
+            🎉 Đã tự động áp dụng giá <strong>COMBO 999K</strong> tối ưu nhất cho thầy cô!
+          </div>
+        </div>
+
+        <button class="btn-primary" style="margin-top:20px" onclick="goToStep2()">
+          <span>📝</span> Tiếp Tục – Điền Thông Tin
+        </button>
+      </section>
+
+      <!-- ==================== STEP 2: REGISTER FORM ==================== -->
+      <section id="step2">
+        <div class="sec-title">📝 Bước 2: Điền Thông Tin Đăng Ký</div>
+
+        <div class="form-card">
+          <!-- Summary recap -->
+          <div class="selected-summary" id="selected-summary">
+            <div class="ss-title">✅ Khoá học đăng ký</div>
+            <div id="ss-list"></div>
+            <div class="ss-total" id="ss-total"></div>
+          </div>
+
+          <!-- Success block -->
+          <div id="reg-success-box" class="success-panel">
+            <span class="success-icon">✅</span>
+            <div class="success-title">Đăng ký thành công!</div>
+            <div class="success-text">
+              Cảm ơn thầy cô <strong id="success-name"></strong>!<br>
+              Hệ thống đã ghi nhận thông tin đăng ký. Vui lòng chuyển khoản ở bước tiếp theo để nhận tài khoản kích hoạt.
+            </div>
+            <button class="btn-primary" style="margin-top:24px" onclick="goToStep3()">
+              <span>💳</span> Đi Đến Thanh Toán
+            </button>
+          </div>
+
+          <!-- Input fields -->
+          <form id="reg-form" onsubmit="submitForm(event)" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="f-name">👤 Họ và Tên</label>
+              <input id="f-name" class="form-input" type="text" placeholder="Nhập họ và tên đầy đủ..." autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-email">📧 Email nhận bài giảng</label>
+              <input id="f-email" class="form-input" type="email" placeholder="example@gmail.com" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-zalo">💬 Số điện thoại Zalo</label>
+              <input id="f-zalo" class="form-input" type="tel" placeholder="0xxx.xxx.xxx" autocomplete="tel" />
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="f-ward">📍 Xã (Phường)</label>
+                <input id="f-ward" class="form-input" type="text" placeholder="Xã / phường..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-province">🏙️ Tỉnh (Thành phố)</label>
+                <input id="f-province" class="form-input" type="text" placeholder="Tỉnh / thành phố..." />
+              </div>
+            </div>
+            <div id="form-err" class="form-err"></div>
+            <button type="submit" id="btn-submit" class="btn-primary">
+              <span>🚀</span> Xác Nhận Đăng Ký
+            </button>
+          </form>
+
+          <button class="btn-back" onclick="goToStep1()">← Quay lại chọn khoá học</button>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 3: PAYMENT ==================== -->
+      <section id="step3">
+        <div class="sec-title">💳 Bước 3: Hoàn Tất Thanh Toán</div>
+
+        <div class="pay-card">
+          <div class="pay-header">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)">Phương thức chuyển khoản qua ngân hàng</div>
+            <div id="pay-course-label" class="pay-course-lbl"></div>
+          </div>
+
+          <div class="pay-body">
+            <!-- Code -->
+            <div class="pay-code-box">
+              <div class="pay-code-label">Nội dung chuyển khoản bắt buộc</div>
+              <div class="pay-code-value" id="pay-code" onclick="copyCode()" title="Click để sao chép"></div>
+              <div class="pay-code-hint">📋 Click lên đoạn mã để sao chép nhanh</div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="bank-tabs">
+              <button class="bank-tab active" id="tab-mb" onclick="switchBank('mb')">🏦 MB Bank</button>
+              <button class="bank-tab" id="tab-tcb" onclick="switchBank('tcb')">🏦 Techcombank</button>
+            </div>
+
+            <!-- MB -->
+            <div class="bank-panel active" id="panel-mb">
+              <div class="bi-row"><div class="bi-label">Chủ TK</div><div class="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div></div>
+              <div class="bi-row"><div class="bi-label">Số TK</div><div class="bi-stk" onclick="copySTK('353536888')">353536888 <span class="copy-ico">📋</span></div></div>
+              <div class="bi-row"><div class="bi-label">Ngân hàng</div><div class="bi-value">MB Bank (Ngân hàng Quân đội)</div></div>
+              <div class="qr-wrap">
+                <div class="qr-label">Quét mã QR dưới đây để chuyển khoản tự động điền</div>
+                <div class="qr-frame"><img id="qr-mb" src="" alt="QR MB Bank" class="qr-img" /></div>
+                <div class="qr-brand mb-brand">MB Bank</div>
+              </div>
+            </div>
+
+            <!-- TCB -->
+            <div class="bank-panel" id="panel-tcb">
+              <div class="bi-row"><div class="bi-label">Chủ TK</div><div class="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div></div>
+              <div class="bi-row"><div class="bi-label">Số TK</div><div class="bi-stk" onclick="copySTK('836869999')">836869999 <span class="copy-ico">📋</span></div></div>
+              <div class="bi-row"><div class="bi-label">Ngân hàng</div><div class="bi-value">Techcombank (TMCP Kỹ Thương)</div></div>
+              <div class="qr-wrap">
+                <div class="qr-label">Quét mã QR dưới đây để chuyển khoản tự động điền</div>
+                <div class="qr-frame"><img id="qr-tcb" src="" alt="QR Techcombank" class="qr-img" /></div>
+                <div class="qr-brand tcb-brand">Techcombank</div>
+              </div>
+            </div>
+
+            <!-- Note -->
+            <div class="pay-note">
+              <div class="pay-note-ico">💬</div>
+              <div class="pay-note-txt">
+                Sau khi chuyển khoản xong, thầy cô hãy bấm <strong>"Báo Zalo Đã Thanh Toán"</strong> bên dưới để nhân viên kích hoạt tài khoản học ngay lập tức.
+              </div>
+            </div>
+
+            <a href="https://zalo.me/0396581283" target="_blank" rel="noopener noreferrer" class="zalo-btn">
+              <span>💬</span> Báo Zalo Đã Thanh Toán (0396.581.283)
+            </a>
+
+            <button class="btn-back" onclick="goToStep1()">← Quay lại Trang Chủ Đăng Ký</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2024 <a href="https://zalo.me/0396581283" target="_blank" rel="noopener noreferrer">MARIS SLIDE</a> · Công ty TNHH Công Nghệ Giáo Dục MRE<br>
+      Zalo hỗ trợ trực tiếp: <a href="https://zalo.me/0396581283" target="_blank">0396.581.283</a> · Học trọn đời · Hỗ trợ 1:1</p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ======================================================
+       COURSES DATA (Matches Original Pricing and Info)
+       ====================================================== */
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfCRCO8-lU8p-flBTPR8gXcKhGfD4XxvcX9daP6tB6kIzfAfE_uPGzMHCq0he2P-Ma/exec';
+
+    const COURSES = [
+      {
+        id: 1, icon: '🎓',
+        title: 'Khoá Thiết Kế Bài Giảng E-Learning',
+        subtitle: 'iSpring Suite 11',
+        oldPrice: '499K', salePrice: '299K', price: 299000,
+        discount: 'Ưu đãi -40%', code: 'ELEAR',
+        badgeColor: 'linear-gradient(135deg, var(--orange), var(--red))',
+        subtitleColor: 'var(--orange)',
+        features: [
+          'Thiết kế bài giảng chuyên nghiệp',
+          'Tạo Quiz tương tác hấp dẫn',
+          'Đồng bộ âm thanh, video dễ dàng',
+          'Xuất bản SCORM, HTML5, Video'
+        ]
+      },
+      {
+        id: 2, icon: '🤖',
+        title: 'Khoá Ứng Dụng AI Vào Giảng Dạy',
+        subtitle: 'ChatGPT · Gemini · Canva AI · Leonardo AI · Veo 3',
+        oldPrice: '999K', salePrice: '399K', price: 399000,
+        discount: 'Ưu đãi -60%', code: 'AIVGD',
+        badgeColor: 'linear-gradient(135deg, var(--yellow), #f59e0b)',
+        subtitleColor: '#d97706',
+        features: [
+          'Soạn giáo án bằng AI nhanh chóng',
+          'Tạo video và hình ảnh AI đẹp mắt',
+          'Tạo học liệu số thông minh',
+          'Viết SKKN và nghiên cứu nhanh'
+        ]
+      },
+      {
+        id: 3, icon: '📱',
+        title: 'Khoá Tạo App Nâng Cao',
+        subtitle: 'Sử dụng AI tạo APP – Không cần lập trình',
+        oldPrice: '999K', salePrice: '399K', price: 399000,
+        discount: 'Ưu đãi -60%', code: 'APPNC',
+        badgeColor: 'linear-gradient(135deg, #ec4899, #d946ef)',
+        subtitleColor: '#c026d3',
+        features: [
+          'Tạo App không cần lập trình',
+          'Quản lý học sinh thông minh',
+          'Tạo trò chơi giáo dục',
+          'Tiết kiệm thời gian quản lý'
+        ]
+      },
+      {
+        id: 4, icon: '🎨',
+        title: 'Khoá Sử Dụng Canva',
+        subtitle: 'Thiết kế từ cơ bản đến nâng cao',
+        oldPrice: '499K', salePrice: '299K', price: 299000,
+        discount: 'Ưu đãi -40%', code: 'CANVA',
+        badgeColor: 'linear-gradient(135deg, #10b981, #059669)',
+        subtitleColor: 'var(--green-dark)',
+        features: [
+          'Thiết kế slide bài giảng chuyên nghiệp',
+          'Tạo infographic đẹp mắt',
+          'Tạo học liệu số sáng tạo',
+          'Ứng dụng AI Canva hiệu quả'
+        ]
+      },
+      {
+        id: 5, icon: '📊',
+        title: 'Khoá Thiết Kế Bài Giảng PowerPoint',
+        subtitle: 'Animation · Trigger · Transition',
+        oldPrice: '499K', salePrice: '299K', price: 299000,
+        discount: 'Ưu đãi -40%', code: 'PPTBG',
+        badgeColor: 'linear-gradient(135deg, #ef4444, #dc2626)',
+        subtitleColor: 'var(--red)',
+        features: [
+          'Thiết kế bài giảng sinh động',
+          'Hiệu ứng chuyên nghiệp',
+          'Trò chơi tương tác Trigger',
+          'Nâng cao kỹ năng trình chiếu'
+        ]
+      },
+      {
+        id: 6, icon: '🎬',
+        title: 'Khoá Dựng Hoạt Hình 2D Bằng Animiz',
+        subtitle: 'Animiz + AI Giọng Nói',
+        oldPrice: '499K', salePrice: '299K', price: 299000,
+        discount: 'Ưu đãi -40%', code: 'ANIMZ',
+        badgeColor: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+        subtitleColor: '#4f46e5',
+        features: [
+          'Tạo phim hoạt hình giáo dục',
+          'Kết hợp AI giọng nói tự nhiên',
+          'Xây dựng tình huống học tập',
+          'Dùng video sinh động cho bài giảng'
+        ]
+      }
+    ];
+
+    const COMBO = { name: 'Combo 6 Khoá Học - 999K', price: 999000, code: 'COMBO' };
+
+    /* ======================================================
+       STATE MANAGEMENT
+       ====================================================== */
+    let selectedCourses = new Set();
+    let isComboSelected = true; // Default combo selected
+    let paymentData = { courseName: '', price: 0, code: '' };
+    let formData = {};
+    let currentStep = 1;
+
+    /* ======================================================
+       RENDER CARDS
+       ====================================================== */
+    function renderCourses() {
+      const grid = document.getElementById('courses-grid');
+      grid.innerHTML = COURSES.map((c) => `
+        <div class="course-card" id="card-${c.id}" onclick="toggleCourse(${c.id})">
+          <div class="card-check-corner" id="check-${c.id}">✓</div>
+          <div class="card-top">
+            <span class="card-num-badge" style="background: ${c.badgeColor}">#${c.id}</span>
+            <div class="card-info">
+              <h3 class="card-title">${c.title}</h3>
+              <div class="card-subtitle" style="color: ${c.subtitleColor}">${c.subtitle}</div>
+            </div>
+          </div>
+          <div class="card-icon" aria-hidden="true">${c.icon}</div>
+          <ul class="card-features">
+            ${c.features.map(f => `<li>${f}</li>`).join('')}
+          </ul>
+          <div class="card-pricing-box">
+            <span class="price-old">${c.oldPrice}</span>
+            <span class="price-promo-lbl">Ưu đãi còn</span>
+            <span class="price-new">${c.salePrice}</span>
+          </div>
+          <button class="card-select-btn" id="btn-select-${c.id}">
+            <span>➕</span> Đăng Ký Khoá Này
+          </button>
+        </div>
+      `).join('');
+    }
+
+    /* ======================================================
+       SELECTION CONTROLLERS
+       ====================================================== */
+    function toggleCombo() {
+      isComboSelected = !isComboSelected;
+      if (isComboSelected) {
+        COURSES.forEach(c => selectedCourses.add(c.id));
+      } else {
+        selectedCourses.clear();
+      }
+      updateUI();
+    }
+
+    function toggleCourse(id) {
+      if (selectedCourses.has(id)) {
+        selectedCourses.delete(id);
+      } else {
+        selectedCourses.add(id);
+      }
+      isComboSelected = selectedCourses.size === COURSES.length;
+      updateUI();
+    }
+
+    function updateUI() {
+      // Update Combo UI
+      const comboCard = document.getElementById('combo-card');
+      const comboCheck = document.getElementById('combo-check');
+      if (isComboSelected) {
+        comboCard.classList.add('selected');
+        comboCheck.textContent = '✓';
+      } else {
+        comboCard.classList.remove('selected');
+        comboCheck.textContent = '';
+      }
+
+      // Update Individual Cards
+      COURSES.forEach(c => {
+        const card = document.getElementById('card-' + c.id);
+        const check = document.getElementById('check-' + c.id);
+        const selectBtn = document.getElementById('btn-select-' + c.id);
+        if (selectedCourses.has(c.id)) {
+          card.classList.add('selected');
+          check.textContent = '✓';
+          selectBtn.innerHTML = '<span>✓</span> Đã Chọn Học';
+        } else {
+          card.classList.remove('selected');
+          check.textContent = '';
+          selectBtn.innerHTML = '<span>➕</span> Đăng Ký Khoá Này';
+        }
+      });
+
+      // Price Summary
+      const summary = document.getElementById('price-summary');
+      const psCount = document.getElementById('ps-count');
+      const psTotal = document.getElementById('ps-total');
+      const upgradeTip = document.getElementById('combo-upgrade-tip');
+
+      if (selectedCourses.size > 0) {
+        summary.classList.add('show');
+        const rawSum = Array.from(selectedCourses).reduce((s, id) => {
+          const c = COURSES.find(x => x.id === id);
+          return s + (c ? c.price : 0);
+        }, 0);
+
+        const isComboUpgrade = !isComboSelected && selectedCourses.size > 0 && rawSum >= 999000;
+        const finalPrice = isComboSelected || isComboUpgrade ? 999000 : rawSum;
+
+        psCount.textContent = `${selectedCourses.size} khoá`;
+        psTotal.textContent = finalPrice.toLocaleString('vi-VN') + 'đ';
+        upgradeTip.style.display = isComboUpgrade ? 'block' : 'none';
+      } else {
+        summary.classList.remove('show');
+      }
+    }
+
+    /* ======================================================
+       NAVIGATION LOGIC
+       ====================================================== */
+    function getPaymentDetails() {
+      const selected = Array.from(selectedCourses);
+      if (selected.length === 0) return { courseName: '', price: 0, code: '' };
+
+      if (isComboSelected || selected.length === COURSES.length) {
+        return { courseName: COMBO.name, price: COMBO.price, code: COMBO.code };
+      }
+
+      const rawSum = selected.reduce((s, id) => {
+        const c = COURSES.find(x => x.id === id);
+        return s + (c ? c.price : 0);
+      }, 0);
+
+      if (rawSum >= 999000) {
+        return { courseName: COMBO.name, price: COMBO.price, code: COMBO.code };
+      }
+
+      const codes = [];
+      const names = [];
+      COURSES.forEach(c => {
+        if (selectedCourses.has(c.id)) {
+          codes.push(c.code);
+          names.push(c.title);
+        }
+      });
+
+      return { courseName: names.join(', '), price: rawSum, code: codes.join(' ') };
+    }
+
+    function goToStep2() {
+      if (selectedCourses.size === 0) {
+        showToast('⚠️ Vui lòng chọn ít nhất một khoá học!');
+        return;
+      }
+      paymentData = getPaymentDetails();
+      buildFormSummary();
+      showStep(2);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToStep1() {
+      showStep(1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToStep3() {
+      buildPaymentUI();
+      showStep(3);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showStep(n) {
+      currentStep = n;
+      document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
+      document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+      document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
+      updateSteps();
+    }
+
+    function updateSteps() {
+      for (let i = 1; i <= 3; i++) {
+        const circle = document.getElementById('step-circle-' + i);
+        const label = document.getElementById('step-label-' + i);
+        circle.className = 'step-circle';
+        label.className = 'step-label';
+
+        if (i < currentStep) {
+          circle.classList.add('done');
+          label.classList.add('done');
+          circle.textContent = '✓';
+        } else if (i === currentStep) {
+          circle.classList.add('active');
+          label.classList.add('active');
+          circle.textContent = i;
+        } else {
+          circle.textContent = i;
+        }
+      }
+
+      for (let i = 1; i <= 2; i++) {
+        const conn = document.getElementById('conn-' + i);
+        conn.className = 'step-connector';
+        if (i < currentStep) conn.classList.add('done');
+      }
+    }
+
+    /* ======================================================
+       FORM PREPARATION
+       ====================================================== */
+    function buildFormSummary() {
+      const list = document.getElementById('ss-list');
+      const total = document.getElementById('ss-total');
+
+      if (paymentData.code === 'COMBO') {
+        list.innerHTML = COURSES.map(c => `<div class="ss-course">${c.icon} ${c.title}</div>`).join('');
+      } else {
+        list.innerHTML = COURSES
+          .filter(c => selectedCourses.has(c.id))
+          .map(c => `<div class="ss-course">${c.icon} ${c.title}</div>`)
+          .join('');
+      }
+      total.textContent = '💰 Tổng số tiền: ' + paymentData.price.toLocaleString('vi-VN') + 'đ';
+    }
+
+    /* ======================================================
+       SUBMISSION
+       ====================================================== */
+    async function submitForm(e) {
+      e.preventDefault();
+      const err = document.getElementById('form-err');
+      err.textContent = '';
+
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const zalo = document.getElementById('f-zalo').value.trim();
+      const ward = document.getElementById('f-ward').value.trim();
+      const province = document.getElementById('f-province').value.trim();
+
+      if (!name) return showFieldError('⚠️ Vui lòng nhập họ và tên');
+      if (!email || !email.includes('@')) return showFieldError('⚠️ Vui lòng nhập email hợp lệ');
+      if (!zalo) return showFieldError('⚠️ Vui lòng nhập số Zalo');
+      if (!ward) return showFieldError('⚠️ Vui lòng nhập xã / phường');
+      if (!province) return showFieldError('⚠️ Vui lòng nhập tỉnh / thành phố');
+
+      formData = { name, email, zalo, ward, province };
+      document.getElementById('success-name').textContent = name;
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳</span> Đang lưu đăng ký...';
+
+      try {
+        const params = new URLSearchParams({
+          name, email, zalo, ward, province,
+          course: paymentData.courseName,
+          timestamp: new Date().toLocaleString('vi-VN'),
+        });
+        await fetch(`${GOOGLE_SCRIPT_URL}?${params}`, { method: 'GET', mode: 'no-cors' });
+      } catch (_) {}
+
+      btn.disabled = false;
+      btn.innerHTML = '<span>🚀</span> Xác Nhận Đăng Ký';
+
+      document.getElementById('reg-form').style.display = 'none';
+      document.getElementById('reg-success-box').classList.add('show');
+    }
+
+    function showFieldError(msg) {
+      document.getElementById('form-err').textContent = msg;
+    }
+
+    /* ======================================================
+       PAYMENT SCREEN SETUP
+       ====================================================== */
+    function buildPaymentUI() {
+      const { courseName, price, code } = paymentData;
+      const nameEnc = encodeURIComponent('CONG TY TNHH CONG NGHE GIAO DUC MRE');
+      const infoEnc = encodeURIComponent(code);
+
+      document.getElementById('pay-code').textContent = code;
+      document.getElementById('pay-course-label').textContent =
+        (courseName || 'Khoá học') + ' – ' + price.toLocaleString('vi-VN') + 'đ';
+
+      document.getElementById('qr-mb').src =
+        `https://img.vietqr.io/image/MB-353536888-compact2.png?amount=${price}&addInfo=${infoEnc}&accountName=${nameEnc}`;
+      document.getElementById('qr-tcb').src =
+        `https://img.vietqr.io/image/TCB-836869999-compact2.png?amount=${price}&addInfo=${infoEnc}&accountName=${nameEnc}`;
+    }
+
+    function switchBank(bank) {
+      ['mb', 'tcb'].forEach(b => {
+        document.getElementById('tab-' + b).className = 'bank-tab' + (b === bank ? ' active' : '');
+        document.getElementById('panel-' + b).className = 'bank-panel' + (b === bank ? ' active' : '');
+      });
+    }
+
+    /* ======================================================
+       COPIER
+       ====================================================== */
+    function copyCode() {
+      const code = document.getElementById('pay-code').textContent;
+      navigator.clipboard.writeText(code).catch(() => {});
+      showToast('📋 Đã sao chép nội dung: ' + code);
+    }
+
+    function copySTK(stk) {
+      navigator.clipboard.writeText(stk).catch(() => {});
+      showToast('📋 Đã sao chép số TK: ' + stk);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    /* ======================================================
+       INIT & PARSE URL CONTROLLER
+       ====================================================== */
+    renderCourses();
+
+    // Default: select combo courses
+    COURSES.forEach(c => selectedCourses.add(c.id));
+    updateUI();
+
+    // Query String handler
+    const urlParams = new URLSearchParams(window.location.search);
+    const preselectedCourse = urlParams.get('course');
+
+    if (preselectedCourse) {
+      if (preselectedCourse === 'combo') {
+        isComboSelected = true;
+        COURSES.forEach(c => selectedCourses.add(c.id));
+      } else {
+        isComboSelected = false;
+        selectedCourses.clear();
+        const found = COURSES.find(c => c.code.toLowerCase() === preselectedCourse.toLowerCase());
+        if (found) {
+          selectedCourses.add(found.id);
+        }
+      }
+      updateUI();
+    }
+  </script>
+</body>
+</html>
