@@ -314,7 +314,7 @@ export default function App() {
         .form-input {
           width: 100%; padding: 12px 14px;
           background: #ffffff; border: 1.5px solid var(--border);
-          border-radius: var(--radius-sm); color: var(--text-dark); font-size: 14px;
+          border-radius: var(--radius-sm); color: var(--text-dark); font-size: 16px;
           outline: none; transition: all 0.25s;
         }
 
@@ -533,6 +533,58 @@ export default function App() {
           from { opacity: 0; transform: translateY(6px); }
           to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Mobile vs Desktop Responsive Grid Layout */
+        .desktop-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .pay-grid-desktop {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        @media (min-width: 769px) {
+          .wrap {
+            max-width: 1000px;
+            padding: 0 24px;
+          }
+          .top-nav-inner {
+            max-width: 1000px;
+            padding: 12px 24px;
+          }
+          .container-body {
+            margin-top: 16px;
+            margin-bottom: 16px;
+            padding: 24px;
+          }
+          .desktop-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 28px;
+            align-items: start;
+          }
+          .pay-grid-desktop {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: start;
+          }
+          .course-checklist {
+            max-height: 250px;
+            overflow-y: auto;
+          }
+          footer {
+            margin-top: 8px;
+            padding: 12px 16px;
+          }
+          .sec-title {
+            margin-bottom: 16px;
+          }
+        }
       `}} />
 
       <div className="min-h-screen bg-[#f8fafc] text-[#475569] pb-12">
@@ -566,147 +618,152 @@ export default function App() {
                 </div>
                 <h2 className="sec-title">📝 ĐĂNG KÝ KHOÁ HỌC</h2>
 
-                <form onSubmit={handleSubmit} noValidate>
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="f-name">👤 Họ và Tên</label>
-                    <input
-                      id="f-name"
-                      type="text"
-                      placeholder="Nhập họ và tên đầy đủ..."
-                      className="form-input"
-                      value={name}
-                      onChange={e => setName(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="f-email">📧 Email nhận bài giảng</label>
-                    <input
-                      id="f-email"
-                      type="email"
-                      placeholder="example@gmail.com"
-                      className="form-input"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="f-zalo">💬 Số điện thoại Zalo</label>
-                    <input
-                      id="f-zalo"
-                      type="tel"
-                      placeholder="0xxx.xxx.xxx"
-                      className="form-input"
-                      value={zalo}
-                      onChange={e => setZalo(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="form-grid">
+                <form onSubmit={handleSubmit} noValidate className="desktop-grid">
+                  <div className="form-fields-side">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="f-ward">📍 Xã (Phường)</label>
+                      <label className="form-label" htmlFor="f-name">👤 Họ và Tên</label>
                       <input
-                        id="f-ward"
+                        id="f-name"
                         type="text"
-                        placeholder="Xã / phường..."
+                        placeholder="Nhập họ và tên đầy đủ..."
                         className="form-input"
-                        value={ward}
-                        onChange={e => setWard(e.target.value)}
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                       />
                     </div>
+
                     <div className="form-group">
-                      <label className="form-label" htmlFor="f-province">🏙️ Tỉnh / Thành phố</label>
+                      <label className="form-label" htmlFor="f-email">📧 Email nhận bài giảng</label>
                       <input
-                        id="f-province"
-                        type="text"
-                        placeholder="Tỉnh / thành phố..."
+                        id="f-email"
+                        type="email"
+                        placeholder="example@gmail.com"
                         className="form-input"
-                        value={province}
-                        onChange={e => setProvince(e.target.value)}
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                       />
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="f-zalo">💬 Số điện thoại Zalo</label>
+                      <input
+                        id="f-zalo"
+                        type="tel"
+                        placeholder="0xxx.xxx.xxx"
+                        className="form-input"
+                        value={zalo}
+                        onChange={e => setZalo(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="form-grid">
+                      <div className="form-group">
+                        <label className="form-label" htmlFor="f-ward">📍 Xã (Phường)</label>
+                        <input
+                          id="f-ward"
+                          type="text"
+                          placeholder="Xã / phường..."
+                          className="form-input"
+                          value={ward}
+                          onChange={e => setWard(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label" htmlFor="f-province">🏙️ Tỉnh / Thành phố</label>
+                        <input
+                          id="f-province"
+                          type="text"
+                          placeholder="Tỉnh / thành phố..."
+                          className="form-input"
+                          value={province}
+                          onChange={e => setProvince(e.target.value)}
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  <div className="form-group">
-                    <label className="form-label">📚 Chọn khoá học đăng ký</label>
-                    
-                    <div className="course-checklist">
-                      {/* Combo Option */}
-                      <div
-                        className={`course-check-item combo-item ${isComboSelected ? 'checked' : ''}`}
-                        onClick={toggleCombo}
-                      >
-                        <div className="check-left">
-                          <div className="checkbox-icon" style={{ color: isComboSelected ? '#ffffff' : 'transparent' }}>✓</div>
-                          <div className="check-title-box">
-                            <span className="check-title">⭐ ĐĂNG KÝ COMBO 6 KHOÁ HỌC</span>
-                            <span className="check-badge">🔥 Siêu Tiết Kiệm</span>
+                  <div className="checklist-side">
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label">📚 Chọn khoá học đăng ký</label>
+                      
+                      <div className="course-checklist">
+                        {/* Combo Option */}
+                        <div
+                          className={`course-check-item combo-item ${isComboSelected ? 'checked' : ''}`}
+                          onClick={toggleCombo}
+                        >
+                          <div className="check-left">
+                            <div className="checkbox-icon" style={{ color: isComboSelected ? '#ffffff' : 'transparent' }}>✓</div>
+                            <div className="check-title-box">
+                              <span className="check-title">⭐ ĐĂNG KÝ COMBO 6 KHOÁ HỌC</span>
+                              <span className="check-badge">🔥 Siêu Tiết Kiệm</span>
+                            </div>
+                          </div>
+                          <div className="check-price-box">
+                            <span className="price-old-strike">2.494K</span>
+                            <span className="price-new-lbl">999.000đ</span>
                           </div>
                         </div>
-                        <div className="check-price-box">
-                          <span className="price-old-strike">2.494K</span>
-                          <span className="price-new-lbl">999.000đ</span>
-                        </div>
-                      </div>
 
-                      <div className="checklist-divider">Hoặc chọn đăng ký lẻ từng khoá học</div>
+                        <div className="checklist-divider">Hoặc chọn đăng ký lẻ từng khoá học</div>
 
-                      {/* Individual list */}
-                      {COURSES.map(c => {
-                        const isChecked = selectedCourses.has(c.id);
-                        return (
-                          <div
-                            key={c.id}
-                            className={`course-check-item ${isChecked ? 'checked' : ''}`}
-                            onClick={() => toggleCourse(c.id)}
-                          >
-                            <div className="check-left">
-                              <div className="checkbox-icon" style={{ color: isChecked ? '#ffffff' : 'transparent' }}>✓</div>
-                              <span className="check-icon-emoji">{c.icon}</span>
-                              <div className="check-title-box">
-                                <span className="check-title">{c.title}</span>
+                        {/* Individual list */}
+                        {COURSES.map(c => {
+                          const isChecked = selectedCourses.has(c.id);
+                          return (
+                            <div
+                              key={c.id}
+                              className={`course-check-item ${isChecked ? 'checked' : ''}`}
+                              onClick={() => toggleCourse(c.id)}
+                            >
+                              <div className="check-left">
+                                <div className="checkbox-icon" style={{ color: isChecked ? '#ffffff' : 'transparent' }}>✓</div>
+                                <span className="check-icon-emoji">{c.icon}</span>
+                                <div className="check-title-box">
+                                  <span className="check-title">{c.title}</span>
+                                </div>
+                              </div>
+                              <div className="check-price-box">
+                                <span className="price-new-lbl">{c.priceText}</span>
                               </div>
                             </div>
-                            <div className="check-price-box">
-                              <span className="price-new-lbl">{c.priceText}</span>
-                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Price summary */}
+                      {selectedCourses.size > 0 && (
+                        <div className="summary-box">
+                          <div className="sum-row">
+                            <span>Số lượng đã chọn:</span>
+                            <strong className="font-bold text-[#1e293b]">{isComboSelected ? '6 khoá học (Combo)' : `${selectedCourses.size} khoá học`}</strong>
                           </div>
-                        );
-                      })}
+                          <div className="sum-row">
+                            <span>TỔNG TIỀN TẠM TÍNH:</span>
+                            <span className="sum-total">
+                              {isComboUpgrade || isComboSelected ? '999.000đ' : `${rawSum.toLocaleString('vi-VN')}đ`}
+                            </span>
+                          </div>
+                          {isComboUpgrade && (
+                            <div className="combo-tip">
+                              🎉 Hệ thống tự áp dụng giá <strong>COMBO 999K</strong> tiết kiệm nhất cho thầy cô!
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Price summary */}
-                    {selectedCourses.size > 0 && (
-                      <div className="summary-box">
-                        <div className="sum-row">
-                          <span>Số lượng đã chọn:</span>
-                          <strong className="font-bold text-[#1e293b]">{isComboSelected ? '6 khoá học (Combo)' : `${selectedCourses.size} khoá học`}</strong>
-                        </div>
-                        <div className="sum-row">
-                          <span>TỔNG TIỀN TẠM TÍNH:</span>
-                          <span className="sum-total">
-                            {isComboUpgrade || isComboSelected ? '999.000đ' : `${rawSum.toLocaleString('vi-VN')}đ`}
-                          </span>
-                        </div>
-                        {isComboUpgrade && (
-                          <div className="combo-tip">
-                            🎉 Hệ thống tự áp dụng giá <strong>COMBO 999K</strong> tiết kiệm nhất cho thầy cô!
-                          </div>
-                        )}
-                      </div>
-                    )}
+                    {error && <div className="form-err" style={{ marginTop: '12px' }}>{error}</div>}
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="btn-primary"
+                      style={{ marginTop: '12px' }}
+                    >
+                      {loading ? '⏳ Đang gửi đăng ký...' : '🚀 Gửi Đăng Ký & Tiếp Tục'}
+                    </button>
                   </div>
-
-                  {error && <div className="form-err">{error}</div>}
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="btn-primary"
-                  >
-                    {loading ? '⏳ Đang gửi đăng ký...' : '🚀 Gửi Đăng Ký & Tiếp Tục'}
-                  </button>
                 </form>
               </section>
             )}
@@ -720,115 +777,97 @@ export default function App() {
                 <h2 className="sec-title">💳 THÔNG TIN CHUYỂN KHOẢN</h2>
 
                 <div className="pay-card">
-                  <div className="pay-header">
-                    <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Khoá học đăng ký</div>
-                    <span className="pay-course-lbl">
-                      {paymentData.courseName} – {paymentData.price.toLocaleString('vi-VN')}đ
-                    </span>
-                  </div>
+                  <div className="pay-grid-desktop">
+                    <div className="pay-details-side">
+                      <div className="pay-header">
+                        <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Khoá học đăng ký</div>
+                        <span className="pay-course-lbl">
+                          {paymentData.courseName} – {paymentData.price.toLocaleString('vi-VN')}đ
+                        </span>
+                      </div>
 
-                  {/* Transfer code */}
-                  <div className="pay-code-box">
-                    <div className="pay-code-label">Nội dung chuyển khoản bắt buộc</div>
-                    <div
-                      className="pay-code-value"
-                      onClick={() => copyText(paymentData.code, 'mã nội dung')}
-                      title="Click để sao chép"
-                    >
-                      {paymentData.code}
-                    </div>
-                    <div className="pay-code-hint">📋 Click lên đoạn mã để sao chép nhanh</div>
-                  </div>
+                      {/* Transfer code */}
+                      <div className="pay-code-box">
+                        <div className="pay-code-label">Nội dung chuyển khoản bắt buộc</div>
+                        <div
+                          className="pay-code-value"
+                          onClick={() => copyText(paymentData.code, 'mã nội dung')}
+                          title="Click để sao chép"
+                        >
+                          {paymentData.code}
+                        </div>
+                        <div className="pay-code-hint">📋 Click lên đoạn mã để sao chép nhanh</div>
+                      </div>
 
-                  {/* Tabs */}
-                  <div className="bank-tabs">
-                    <button
-                      className={`bank-tab ${activeBank === 'mb' ? 'active' : ''}`}
-                      onClick={() => setActiveBank('mb')}
-                    >
-                      🏦 MB Bank
-                    </button>
-                    <button
-                      className={`bank-tab ${activeBank === 'tcb' ? 'active' : ''}`}
-                      onClick={() => setActiveBank('tcb')}
-                    >
-                      🏦 Techcombank
-                    </button>
-                  </div>
+                      {/* Tabs */}
+                      <div className="bank-tabs">
+                        <button
+                          className={`bank-tab ${activeBank === 'mb' ? 'active' : ''}`}
+                          onClick={() => setActiveBank('mb')}
+                        >
+                          🏦 MB Bank
+                        </button>
+                        <button
+                          className={`bank-tab ${activeBank === 'tcb' ? 'active' : ''}`}
+                          onClick={() => setActiveBank('tcb')}
+                        >
+                          🏦 Techcombank
+                        </button>
+                      </div>
 
-                  {/* MB Bank Panel */}
-                  <div className={`bank-panel ${activeBank === 'mb' ? 'active' : ''}`}>
-                    <div className="bi-row">
-                      <div className="bi-label">Chủ TK</div>
-                      <div className="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div>
-                    </div>
-                    <div className="bi-row">
-                      <div className="bi-label">Số TK</div>
-                      <div className="bi-stk" onClick={() => copyText('353536888', 'số tài khoản')}>
-                        353536888 <span className="copy-ico">📋</span>
+                      {/* Bank info details */}
+                      <div className="bank-info-container">
+                        <div className="bi-row">
+                          <div className="bi-label">Chủ TK</div>
+                          <div className="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div>
+                        </div>
+                        <div className="bi-row">
+                          <div className="bi-label">Số TK</div>
+                          <div className="bi-stk" onClick={() => copyText(activeBank === 'mb' ? '353536888' : '836869999', 'số tài khoản')}>
+                            {activeBank === 'mb' ? '353536888' : '836869999'} <span className="copy-ico">📋</span>
+                          </div>
+                        </div>
+                        <div className="bi-row">
+                          <div className="bi-label">Ngân hàng</div>
+                          <div className="bi-value">{activeBank === 'mb' ? 'MB Bank (Ngân hàng Quân đội)' : 'Techcombank (TMCP Kỹ Thương)'}</div>
+                        </div>
                       </div>
                     </div>
-                    <div className="bi-row">
-                      <div className="bi-label">Ngân hàng</div>
-                      <div className="bi-value">MB Bank (Ngân hàng Quân đội)</div>
-                    </div>
-                    <div className="qr-wrap">
-                      <div className="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
-                      <div className="qr-frame">
-                        <img src={qrMb} alt="QR MB Bank" className="qr-img" />
+
+                    <div className="pay-qr-side">
+                      <div className="qr-wrap" style={{ padding: '0 0 8px' }}>
+                        <div className="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
+                        <div className="qr-frame">
+                          <img src={activeBank === 'mb' ? qrMb : qrTcb} alt={`QR ${activeBank === 'mb' ? 'MB Bank' : 'Techcombank'}`} className="qr-img" />
+                        </div>
+                        <div className={`qr-brand ${activeBank === 'mb' ? 'mb-brand' : 'tcb-brand'}`}>{activeBank === 'mb' ? 'MB Bank' : 'Techcombank'}</div>
                       </div>
-                      <div className="qr-brand mb-brand">MB Bank</div>
+
+                      {/* Note */}
+                      <div className="pay-note">
+                        <span className="pay-note-ico">💬</span>
+                        <div className="pay-note-txt">
+                          Sau khi chuyển khoản xong, thầy cô hãy bấm <strong>"Báo Zalo Đã Thanh Toán"</strong> bên dưới để nhân viên kích hoạt tài khoản học ngay lập tức.
+                        </div>
+                      </div>
+
+                      <a
+                        href="https://zalo.me/0396581283"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="zalo-btn"
+                      >
+                        <span>💬</span> Báo Zalo Đã Thanh Toán
+                      </a>
+
+                      <button
+                        onClick={handleBack}
+                        className="btn-back"
+                      >
+                        ← Quay lại chỉnh sửa thông tin
+                      </button>
                     </div>
                   </div>
-
-                  {/* Techcombank Panel */}
-                  <div className={`bank-panel ${activeBank === 'tcb' ? 'active' : ''}`}>
-                    <div className="bi-row">
-                      <div className="bi-label">Chủ TK</div>
-                      <div className="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div>
-                    </div>
-                    <div className="bi-row">
-                      <div className="bi-label">Số TK</div>
-                      <div className="bi-stk" onClick={() => copyText('836869999', 'số tài khoản')}>
-                        836869999 <span className="copy-ico">📋</span>
-                      </div>
-                    </div>
-                    <div className="bi-row">
-                      <div className="bi-label">Ngân hàng</div>
-                      <div className="bi-value">Techcombank (TMCP Kỹ Thương)</div>
-                    </div>
-                    <div className="qr-wrap">
-                      <div className="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
-                      <div className="qr-frame">
-                        <img src={qrTcb} alt="QR Techcombank" className="qr-img" />
-                      </div>
-                      <div className="qr-brand tcb-brand">Techcombank</div>
-                    </div>
-                  </div>
-
-                  {/* Note */}
-                  <div className="pay-note">
-                    <span className="pay-note-ico">💬</span>
-                    <div className="pay-note-txt">
-                      Sau khi chuyển khoản xong, thầy cô hãy bấm <strong>"Báo Zalo Đã Thanh Toán"</strong> bên dưới để nhân viên kích hoạt tài khoản học ngay lập tức.
-                    </div>
-                  </div>
-
-                  <a
-                    href="https://zalo.me/0396581283"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="zalo-btn"
-                  >
-                    <span>💬</span> Báo Zalo Đã Thanh Toán
-                  </a>
-
-                  <button
-                    onClick={handleBack}
-                    className="btn-back"
-                  >
-                    ← Quay lại chỉnh sửa thông tin
-                  </button>
                 </div>
               </section>
             )}
