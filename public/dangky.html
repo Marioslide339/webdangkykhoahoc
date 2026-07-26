@@ -146,7 +146,7 @@
     .form-input {
       width: 100%; padding: 12px 14px;
       background: #ffffff; border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm); color: var(--text-dark); font-size: 14px;
+      border-radius: var(--radius-sm); color: var(--text-dark); font-size: 16px;
       outline: none; transition: all 0.25s;
     }
 
@@ -223,6 +223,7 @@
       background: #f1f5f9; padding: 6px 16px;
       font-size: 10px; font-weight: 800; color: var(--text-muted);
       text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border);
+      text-align: left;
     }
 
     /* Price Summary Box */
@@ -241,7 +242,7 @@
     }
 
     /* ============================================
-       STEP 3: PAYMENT SCREEN
+       PAYMENT SCREEN
        ============================================ */
     .pay-card { border-radius: var(--radius); }
 
@@ -280,9 +281,12 @@
       box-shadow: 0 2px 8px rgba(232,25,44,0.06);
     }
 
-    /* Bank panel */
-    .bank-panel { display: none; }
-    .bank-panel.active { display: block; }
+    /* Bank details panels */
+    .bank-info-panel { display: none; }
+    .bank-info-panel.active { display: block; }
+    
+    .qr-panel { display: none; }
+    .qr-panel.active { display: block; }
 
     .bi-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; }
     .bi-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; min-width: 90px; flex-shrink: 0; }
@@ -339,6 +343,16 @@
     .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,25,44,0.35); }
     .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
+    .btn-back {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; padding: 11px;
+      background: #f1f5f9; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-body);
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: all 0.25s; margin-top: 10px;
+    }
+    .btn-back:hover { background: #e2e8f0; }
+
     /* ============================================
        TOAST & FOOTER
        ============================================ */
@@ -359,6 +373,58 @@
     }
     footer p { color: var(--text-muted); font-size: 11px; line-height: 1.8; }
     footer a { color: var(--red); text-decoration: none; font-weight: 600; }
+
+    /* Responsive grid styles */
+    .desktop-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pay-grid-desktop {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    @media (min-width: 769px) {
+      .wrap {
+        max-width: 1000px;
+        padding: 0 24px;
+      }
+      .top-nav-inner {
+        max-width: 1000px;
+        padding: 12px 24px;
+      }
+      .container-body {
+        margin-top: 16px;
+        margin-bottom: 16px;
+        padding: 24px;
+      }
+      .desktop-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 28px;
+        align-items: start;
+      }
+      .pay-grid-desktop {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+      .course-checklist {
+        max-height: 250px;
+        overflow-y: auto;
+      }
+      footer {
+        margin-top: 8px;
+        padding: 12px 16px;
+      }
+      .sec-title {
+        margin-bottom: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -392,76 +458,80 @@
         </div>
         <div class="sec-title">📝 ĐĂNG KÝ KHOÁ HỌC</div>
 
-        <form onsubmit="submitRegistration(event)" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="f-name">👤 Họ và Tên</label>
-            <input id="f-name" class="form-input" type="text" placeholder="Nhập họ và tên đầy đủ..." autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-email">📧 Email nhận bài giảng</label>
-            <input id="f-email" class="form-input" type="email" placeholder="example@gmail.com" autocomplete="email" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-zalo">💬 Số điện thoại Zalo</label>
-            <input id="f-zalo" class="form-input" type="tel" placeholder="0xxx.xxx.xxx" autocomplete="tel" />
-          </div>
-          
-          <div class="form-grid">
+        <form onsubmit="submitRegistration(event)" novalidate class="desktop-grid">
+          <div class="form-fields-side">
             <div class="form-group">
-              <label class="form-label" for="f-ward">📍 Xã (Phường)</label>
-              <input id="f-ward" class="form-input" type="text" placeholder="Xã / phường..." />
+              <label class="form-label" for="f-name">👤 Họ và Tên</label>
+              <input id="f-name" class="form-input" type="text" placeholder="Nhập họ và tên đầy đủ..." autocomplete="name" />
             </div>
             <div class="form-group">
-              <label class="form-label" for="f-province">🏙️ Tỉnh / Thành phố</label>
-              <input id="f-province" class="form-input" type="text" placeholder="Tỉnh / thành phố..." />
+              <label class="form-label" for="f-email">📧 Email nhận bài giảng</label>
+              <input id="f-email" class="form-input" type="email" placeholder="example@gmail.com" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-zalo">💬 Số điện thoại Zalo</label>
+              <input id="f-zalo" class="form-input" type="tel" placeholder="0xxx.xxx.xxx" autocomplete="tel" />
+            </div>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="f-ward">📍 Xã (Phường)</label>
+                <input id="f-ward" class="form-input" type="text" placeholder="Xã / phường..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-province">🏙️ Tỉnh / Thành phố</label>
+                <input id="f-province" class="form-input" type="text" placeholder="Tỉnh / thành phố..." />
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">📚 Chọn khoá học đăng ký</label>
-            
-            <div class="course-checklist">
-              <!-- Combo Option -->
-              <div class="course-check-item combo-item" id="combo-row" onclick="toggleComboSelection()">
-                <div class="check-left">
-                  <div class="checkbox-icon" id="combo-chk-icon">✓</div>
-                  <div class="check-title-box">
-                    <span class="check-title">⭐ ĐĂNG KÝ COMBO 6 KHOÁ HỌC</span>
-                    <span class="check-badge">🔥 Siêu Tiết Kiệm</span>
+          <div class="checklist-side">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">📚 Chọn khoá học đăng ký</label>
+              
+              <div class="course-checklist">
+                <!-- Combo Option -->
+                <div class="course-check-item combo-item" id="combo-row" onclick="toggleComboSelection()">
+                  <div class="check-left">
+                    <div class="checkbox-icon" id="combo-chk-icon">✓</div>
+                    <div class="check-title-box">
+                      <span class="check-title">⭐ ĐĂNG KÝ COMBO 6 KHOÁ HỌC</span>
+                      <span class="check-badge">🔥 Siêu Tiết Kiệm</span>
+                    </div>
+                  </div>
+                  <div class="check-price-box">
+                    <span class="price-old-strike">2.494K</span>
+                    <span class="price-new-lbl">999.000đ</span>
                   </div>
                 </div>
-                <div class="check-price-box">
-                  <span class="price-old-strike">2.494K</span>
-                  <span class="price-new-lbl">999.000đ</span>
+
+                <div class="checklist-divider">Hoặc chọn đăng ký lẻ từng khoá học</div>
+
+                <!-- Individual courses -->
+                <div id="individual-list"></div>
+              </div>
+
+              <!-- Price Recap -->
+              <div class="summary-box" id="summary-box">
+                <div class="sum-row">
+                  <span>Số lượng đã chọn:</span>
+                  <strong id="sum-count">0 khoá học</strong>
+                </div>
+                <div class="sum-row">
+                  <span>TỔNG TIỀN TẠM TÍNH:</span>
+                  <span class="sum-total" id="sum-total">0đ</span>
+                </div>
+                <div class="combo-tip" id="combo-tip" style="display:none">
+                  🎉 Hệ thống tự áp dụng giá **COMBO 999K** tiết kiệm nhất cho thầy cô!
                 </div>
               </div>
-
-              <div class="checklist-divider">Hoặc chọn đăng ký lẻ từng khoá học</div>
-
-              <!-- Individual courses -->
-              <div id="individual-list"></div>
             </div>
 
-            <!-- Price Recap -->
-            <div class="summary-box" id="summary-box">
-              <div class="sum-row">
-                <span>Số lượng đã chọn:</span>
-                <strong id="sum-count">0 khoá học</strong>
-              </div>
-              <div class="sum-row">
-                <span>TỔNG TIỀN TẠM TÍNH:</span>
-                <span class="sum-total" id="sum-total">0đ</span>
-              </div>
-              <div class="combo-tip" id="combo-tip" style="display:none">
-                🎉 Hệ thống tự áp dụng giá **COMBO 999K** tiết kiệm nhất cho thầy cô!
-              </div>
-            </div>
+            <div id="form-err" class="form-err" style="margin-top: 12px;"></div>
+            <button type="submit" id="btn-submit" class="btn-primary" style="margin-top: 12px;">
+              <span>🚀</span> Gửi Đăng Ký &amp; Tiếp Tục
+            </button>
           </div>
-
-          <div id="form-err" class="form-err"></div>
-          <button type="submit" id="btn-submit" class="btn-primary">
-            <span>🚀</span> Gửi Đăng Ký &amp; Tiếp Tục
-          </button>
         </form>
       </section>
 
@@ -473,61 +543,75 @@
         <div class="sec-title">💳 THÔNG TIN CHUYỂN KHOẢN</div>
 
         <div class="pay-card">
-          <div class="pay-header">
-            <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">Khoá học đăng ký</div>
-            <div id="pay-course-label" class="pay-course-lbl"></div>
-          </div>
+          <div class="pay-grid-desktop">
+            <div class="pay-details-side">
+              <div class="pay-header">
+                <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">Khoá học đăng ký</div>
+                <div id="pay-course-label" class="pay-course-lbl"></div>
+              </div>
 
-          <!-- Code -->
-          <div class="pay-code-box">
-            <div class="pay-code-label">Nội dung chuyển khoản bắt buộc</div>
-            <div class="pay-code-value" id="pay-code" onclick="copyCodeText()" title="Click để sao chép"></div>
-            <div class="pay-code-hint">📋 Click lên đoạn mã để sao chép nhanh</div>
-          </div>
+              <!-- Code -->
+              <div class="pay-code-box">
+                <div class="pay-code-label">Nội dung chuyển khoản bắt buộc</div>
+                <div class="pay-code-value" id="pay-code" onclick="copyCodeText()" title="Click để sao chép"></div>
+                <div class="pay-code-hint">📋 Click lên đoạn mã để sao chép nhanh</div>
+              </div>
 
-          <!-- Tabs -->
-          <div class="bank-tabs">
-            <button class="bank-tab active" id="tab-mb" onclick="switchBankTab('mb')">🏦 MB Bank</button>
-            <button class="bank-tab" id="tab-tcb" onclick="switchBankTab('tcb')">🏦 Techcombank</button>
-          </div>
+              <!-- Tabs -->
+              <div class="bank-tabs">
+                <button class="bank-tab active" id="tab-mb" onclick="switchBankTab('mb')">🏦 MB Bank</button>
+                <button class="bank-tab" id="tab-tcb" onclick="switchBankTab('tcb')">🏦 Techcombank</button>
+              </div>
 
-          <!-- MB -->
-          <div class="bank-panel active" id="panel-mb">
-            <div class="bi-row"><div class="bi-label">Chủ TK</div><div class="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div></div>
-            <div class="bi-row"><div class="bi-label">Số TK</div><div class="bi-stk" onclick="copyAccountNumber('353536888')">353536888 <span class="copy-ico">📋</span></div></div>
-            <div class="bi-row"><div class="bi-label">Ngân hàng</div><div class="bi-value">MB Bank (Ngân hàng Quân đội)</div></div>
-            <div class="qr-wrap">
-              <div class="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
-              <div class="qr-frame"><img id="qr-mb" src="" alt="QR MB Bank" class="qr-img" /></div>
-              <div class="qr-brand mb-brand">MB Bank</div>
+              <!-- MB Info -->
+              <div id="info-mb" class="bank-info-panel active">
+                <div class="bi-row"><div class="bi-label">Chủ TK</div><div class="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div></div>
+                <div class="bi-row"><div class="bi-label">Số TK</div><div class="bi-stk" onclick="copyAccountNumber('353536888')">353536888 <span class="copy-ico">📋</span></div></div>
+                <div class="bi-row"><div class="bi-label">Ngân hàng</div><div class="bi-value">MB Bank (Ngân hàng Quân đội)</div></div>
+              </div>
+
+              <!-- TCB Info -->
+              <div id="info-tcb" class="bank-info-panel" style="display: none;">
+                <div class="bi-row"><div class="bi-label">Chủ TK</div><div class="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div></div>
+                <div class="bi-row"><div class="bi-label">Số TK</div><div class="bi-stk" onclick="copyAccountNumber('836869999')">836869999 <span class="copy-ico">📋</span></div></div>
+                <div class="bi-row"><div class="bi-label">Ngân hàng</div><div class="bi-value">Techcombank (TMCP Kỹ Thương)</div></div>
+              </div>
+            </div>
+
+            <div class="pay-qr-side">
+              <!-- QR MB -->
+              <div id="qr-panel-mb" class="qr-panel active">
+                <div class="qr-wrap" style="padding: 0 0 8px;">
+                  <div class="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
+                  <div class="qr-frame"><img id="qr-mb" src="" alt="QR MB Bank" class="qr-img" /></div>
+                  <div class="qr-brand mb-brand">MB Bank</div>
+                </div>
+              </div>
+
+              <!-- QR TCB -->
+              <div id="qr-panel-tcb" class="qr-panel" style="display: none;">
+                <div class="qr-wrap" style="padding: 0 0 8px;">
+                  <div class="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
+                  <div class="qr-frame"><img id="qr-tcb" src="" alt="QR Techcombank" class="qr-img" /></div>
+                  <div class="qr-brand tcb-brand">Techcombank</div>
+                </div>
+              </div>
+
+              <!-- Note -->
+              <div class="pay-note" style="margin: 8px 0;">
+                <div class="pay-note-ico">💬</div>
+                <div class="pay-note-txt">
+                  Sau khi chuyển khoản xong, thầy cô hãy bấm <strong>"Báo Zalo Đã Thanh Toán"</strong> bên dưới để nhân viên kích hoạt tài khoản học ngay lập tức.
+                </div>
+              </div>
+
+              <a href="https://zalo.me/0396581283" target="_blank" rel="noopener noreferrer" class="zalo-btn">
+                <span>💬</span> Báo Zalo Đã Thanh Toán
+              </a>
+
+              <button class="btn-back" onclick="backToForm()">← Quay lại chỉnh sửa thông tin</button>
             </div>
           </div>
-
-          <!-- TCB -->
-          <div class="bank-panel" id="panel-tcb">
-            <div class="bi-row"><div class="bi-label">Chủ TK</div><div class="bi-value">CONG TY TNHH CONG NGHE GIAO DUC MRE</div></div>
-            <div class="bi-row"><div class="bi-label">Số TK</div><div class="bi-stk" onclick="copyAccountNumber('836869999')">836869999 <span class="copy-ico">📋</span></div></div>
-            <div class="bi-row"><div class="bi-label">Ngân hàng</div><div class="bi-value">Techcombank (TMCP Kỹ Thương)</div></div>
-            <div class="qr-wrap">
-              <div class="qr-label">Quét mã QR để chuyển khoản điền sẵn nội dung</div>
-              <div class="qr-frame"><img id="qr-tcb" src="" alt="QR Techcombank" class="qr-img" /></div>
-              <div class="qr-brand tcb-brand">Techcombank</div>
-            </div>
-          </div>
-
-          <!-- Note -->
-          <div class="pay-note">
-            <div class="pay-note-ico">💬</div>
-            <div class="pay-note-txt">
-              Sau khi chuyển khoản xong, thầy cô hãy bấm <strong>"Báo Zalo Đã Thanh Toán"</strong> bên dưới để nhân viên kích hoạt tài khoản học ngay lập tức.
-            </div>
-          </div>
-
-          <a href="https://zalo.me/0396581283" target="_blank" rel="noopener noreferrer" class="zalo-btn">
-            <span>💬</span> Báo Zalo Đã Thanh Toán
-          </a>
-
-          <button class="btn-back" onclick="backToForm()">← Quay lại chỉnh sửa thông tin</button>
         </div>
       </section>
 
@@ -759,7 +843,8 @@
     function switchBankTab(bank) {
       ['mb', 'tcb'].forEach(b => {
         document.getElementById('tab-' + b).className = 'bank-tab' + (b === bank ? ' active' : '');
-        document.getElementById('panel-' + b).className = 'bank-panel' + (b === bank ? ' active' : '');
+        document.getElementById('info-' + b).style.display = b === bank ? 'block' : 'none';
+        document.getElementById('qr-panel-' + b).style.display = b === bank ? 'block' : 'none';
       });
     }
 
@@ -771,7 +856,7 @@
 
     /* ======================================================
        COPIER & TOAST
-       ====================================================== */
+       ===================================================== */
     function copyCodeText() {
       const code = document.getElementById('pay-code').textContent;
       navigator.clipboard.writeText(code).catch(() => {});
