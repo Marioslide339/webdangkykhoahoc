@@ -16,7 +16,7 @@ interface Course {
 }
 
 const COURSES: Course[] = [
-  { id: 1, icon: '🎓', title: 'Khoá Thiết Kế Bài Giảng E-Learning', price: 299000, priceText: '299K', code: 'ELEAR' },
+  { id: 1, icon: '🎓', title: 'Khoá Thiết Kế Bài Giảng E-Learning', price: 399000, priceText: '399K', code: 'ELEAR' },
   { id: 2, icon: '🤖', title: 'Khoá Ứng Dụng AI Vào Giảng Dạy', price: 399000, priceText: '399K', code: 'AIVGD' },
   { id: 3, icon: '📱', title: 'Khoá Tạo App Nâng Cao', price: 399000, priceText: '399K', code: 'APPNC' },
   { id: 4, icon: '🎨', title: 'Khoá Sử Dụng Canva', price: 299000, priceText: '299K', code: 'CANVA' },
